@@ -1,0 +1,23 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Response</title>
+    <link rel="stylesheet" href="{% static 'chat/styles.css' %}">
+</head>
+<body>
+    <div class="response-container">
+        <h1>Chat Response</h1>
+        <p class="response-text">{{ response }}</p>
+        <a href="/" class="back-button">Back to Home</a>
+    </div>
+    <script>
+        // Redirect to home page if the page is refreshed
+        if (performance.navigation.type === performance.navigation.TYPE_RELOAD) {
+            window.location.href = "/";
+        }
+    </script>
+</body>
+</html>

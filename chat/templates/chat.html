@@ -1,0 +1,21 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat</title>
+    <link rel="stylesheet" href="{% static 'chat/styles.css' %}">
+</head>
+<body>
+    <div class="chat-container">
+        <h1>Welcome to the Chat Page</h1>
+        <form method="POST" action="{% url 'chat_response' %}">
+            {% csrf_token %}
+            <textarea name="prompt" placeholder="Enter your message here"></textarea>
+            <button type="submit">Send</button>
+        </form>
+        <a href="/" class="back-button">Back to Home</a>
+    </div>
+</body>
+</html>

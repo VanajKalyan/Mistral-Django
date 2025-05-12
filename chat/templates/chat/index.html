@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chat with Mistral</title>
+    <script>
+        async function sendQuestion(event) {
+            event.preventDefault();  // Prevent page reload
+            const prompt = document.querySelector('textarea[name="prompt"]').value;
+
+            const response = await fetch('/chat-response/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': '{{ csrf_token }}'
+                },
+                body: JSON.stringify({ question: prompt })
+            });
+
+            const data = await response.json();
+            document.getElementById('response').innerText = data.response || 'No response';
+        }
+    </script>
+</head>
+<body>
+    <h1>Welcome to the Mistral Chat App</h1>
+    <form onsubmit="sendQuestion(event)">
+        {% csrf_token %}
+        <textarea name="prompt" rows="5" cols="50" placeholder="Ask Mistral..."></textarea><br>
+        <button type="submit">Submit</button>
+    </form>
+
+    <h3>Response:</h3>
+    <p id="response"></p>
+</body>
+</html>
